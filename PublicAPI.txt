@@ -1,0 +1,28 @@
+Backend :
+
+Auth :
+
+// Register
+POST: /register => Auth/RegisterController@register
+POST: /register/confirm => Auth/RegisterController@confirm
+
+// Login
+POST: /login => Auth/LoginController@login
+
+// Logout 
+POST: /logout => Auth/LoginController@logout
+
+// Forget Password
+POST: /password/email => Auth/ForgotPasswordController@sendResetLinkEmail
+POST: /password/reset => Auth/ForgotPasswordController@reset
+
+Frontend :
+
+Auth :
+
+/
+/auth/register
+/auth/regsiter/confirm/:token
+/auth/login
+/auth/password/email
+/auth/password/reset/:token
