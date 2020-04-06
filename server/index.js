@@ -1,5 +1,6 @@
 import Express from 'express'
 import Mongoose from 'mongoose'
+import BodyParser from 'body-parser' 
 
 // Server Imports
 import config from '@config'
@@ -11,6 +12,8 @@ Mongoose.connect(config.database_url, {
 })
 
 const app = Express()
+
+app.use(BodyParser.json())
 
 app.use(v1Router)
 

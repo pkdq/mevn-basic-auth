@@ -6,8 +6,9 @@
         ["module-resolver", {
             "root": ["./"],
             "alias": {
-                "@config": "./server/config",
                 "@routes": "./server/routes",
+                "@config": "./server/config",
+                "@models": "./server/models",
                 "@controllers": "./server/controllers"
             }
         }]
