@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import authRouter from './v1/auth'
+import authRouter from '@routes/v1/auth'
 
 const v1Router = new Router()
 

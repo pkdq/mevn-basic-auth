@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import RegisterController from './../../controllers/v1/auth/RegisterController'
+import RegisterController from '@controllers/v1/auth/RegisterController'
 
 const authRouter = new Router()
 
