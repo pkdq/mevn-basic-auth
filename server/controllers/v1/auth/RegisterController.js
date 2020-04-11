@@ -9,7 +9,9 @@ const register = async (req, res) => {
         password
     })
 
-    return res.status(200).json({ user })
+    const token = user.generateToken()
+
+    return res.status(200).json({ user, token })
 }
 
 const confirm = (req, res) => {}

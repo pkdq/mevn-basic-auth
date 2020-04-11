@@ -1,3 +1,4 @@
+import JWT from 'jsonwebtoken'
 import BcryptJs from 'bcryptjs'
 import Mongoose from 'mongoose'
 import Mail from '@fullstackjs/mail'
@@ -33,5 +34,9 @@ UserSchema.post('save', async function() {
         })
         .send()
 })
+
+UserSchema.methods.generateToken = function() {
+    return JWT.sign({ id: this._id}, config.jwt_secret)
+}
 
 export default Mongoose.model('User', UserSchema)
