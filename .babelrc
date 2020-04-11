@@ -9,6 +9,7 @@
                 "@routes": "./server/routes",
                 "@config": "./server/config",
                 "@models": "./server/models",
+                "@validators": "./server/validators",
                 "@controllers": "./server/controllers"
             }
         }]
