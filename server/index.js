@@ -10,6 +10,7 @@ Mongoose.connect(config.database_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+Mongoose.set('useFindAndModify', false)
 
 const app = Express()
 

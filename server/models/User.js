@@ -6,6 +6,8 @@ import RandomString from 'randomstring'
 
 import config from '@config'
 
+import ForgotPassword from '@models/ForgotPassword'
+
 const UserSchema = new Mongoose.Schema({
     name: String,
     email: String,
@@ -41,6 +43,25 @@ UserSchema.methods.generateToken = function() {
 
 UserSchema.methods.comparePasswords = function(password) {
     return BcryptJs.compareSync(password, this.password)
+}
+
+UserSchema.methods.forgotPassword = async function() {
+    const token = RandomString.generate(72)
+
+    await ForgotPassword.create({
+        token,
+        email: this.email,
+        created_at: new Date()
+    })
+
+    await new Mail('forgot-password')
+        .to(this.email, this.name)
+        .subject('Password reset')
+        .data({
+            url: `${config.url} /auth/password/reset/${token}`,
+            name: this.name
+        })
+        .send()
 }
 
 export default Mongoose.model('User', UserSchema)
