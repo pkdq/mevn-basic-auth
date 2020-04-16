@@ -25,7 +25,18 @@ const confirm = async (req, res) => {
     return res.status(200).json({ user, token })
 }
 
+const resend = async (req, res) => {
+    if (!req.user.events.email_confirmed_at) {
+        await req.user.sendActivationEmail()
+    }
+
+    return res.status(200).json({
+        message: 'Account already activated !!'
+    })
+}
+
 export default {
     register,
-    confirm
+    confirm,
+    resend
 }

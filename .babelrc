@@ -10,6 +10,7 @@
                 "@config": "./server/config",
                 "@models": "./server/models",
                 "@validators": "./server/validators",
+                "@middlewares": "./server/middlewares",
                 "@controllers": "./server/controllers"
             }
         }]

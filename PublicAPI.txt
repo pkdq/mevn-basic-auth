@@ -5,6 +5,7 @@ Auth :
 // Register
 POST: /register => Auth/RegisterController@register
 POST: /register/confirm => Auth/RegisterController@confirm
+POST: /register/email/resend => Auth/RegisterController@resend
 
 // Login
 POST: /login => Auth/LoginController@login

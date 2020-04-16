@@ -27,6 +27,10 @@ UserSchema.pre('save', function() {
 })
 
 UserSchema.post('save', async function() {
+    await this.sendActivationEmail()
+})
+
+UserSchema.methods.sendActivationEmail = async function() {
     await new Mail('confirm-account')
         .to(this.email, this.name)
         .subject('Please confirm your account')
@@ -35,7 +39,7 @@ UserSchema.post('save', async function() {
             url: `${config.url}/auth/register/confirm/${this.email_confirm_code}`
         })
         .send()
-})
+}
 
 UserSchema.methods.generateToken = function() {
     return JWT.sign({ id: this._id}, config.jwt_secret)
