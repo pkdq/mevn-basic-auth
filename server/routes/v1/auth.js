@@ -3,6 +3,7 @@ import LoginValidator from '@validators/login'
 import RegisterValidatror from '@validators/register'
 import ResetPasswordValidator from '@validators/resetPassword'
 import ForgotPasswordValidator from '@validators/forgotPassword'
+import UserAccountConfirmationValidator from '@validators/UserAccountConfirmation'
 
 import LoginController from '@controllers/v1/auth/LoginController'
 import RegisterController from '@controllers/v1/auth/RegisterController'
@@ -11,7 +12,7 @@ import ForgotPasswordController from '@controllers/v1/auth/ForgotPasswordControl
 const authRouter = new Router()
 
 authRouter.post('/register', RegisterValidatror, RegisterController.register)
-authRouter.post('/register/confirm', RegisterController.confirm)
+authRouter.post('/register/confirm', UserAccountConfirmationValidator, RegisterController.confirm)
 
 authRouter.post('/login', LoginValidator, LoginController.login)
 
