@@ -11,6 +11,7 @@ import v1Router from '@routes'
 import Webpack from 'webpack'
 import WebpackConfig from './../webpack.config'
 import WebpackDevMiddleware from 'webpack-dev-middleware'
+import WebpackHotMiddleware from 'webpack-hot-middleware'
 
 // Establish connection to the MondoDB
 Mongoose.connect(config.database_url, {
@@ -24,7 +25,10 @@ const app = Express()
 
 // Setup Client Server-Side Rendering (will launch our Client Side)
 const compiler = Webpack(WebpackConfig)
-app.use(WebpackDevMiddleware(compiler))
+app.use(WebpackDevMiddleware(compiler, {
+    hot: true
+}))
+app.use(WebpackHotMiddleware(compiler))
 
 // To Parse incoming request bodies. Available under the req.body property 
 app.use(BodyParser.json())
