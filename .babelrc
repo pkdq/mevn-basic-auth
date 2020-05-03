@@ -6,6 +6,7 @@
         ["module-resolver", {
             "root": ["./"],
             "alias": {
+                "@views": "./client/views",
                 "@routes": "./server/routes",
                 "@config": "./server/config",
                 "@models": "./server/models",
