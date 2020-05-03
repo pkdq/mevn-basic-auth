@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -24,10 +25,20 @@ module.exports = {
                 use: {
                     loader: 'vue-loader'
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
             }
         ]
     },
     plugins: [
         new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'app.css'
+        })
     ]
 }
