@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import cTextInput from '@components/common/cTextInput.vue'
 
 export default {
@@ -54,12 +56,16 @@ export default {
     }),
 
     methods: {
+        ...mapActions('auth', ['registerUser']),
+
         async register() {
-            const isValid = await this.$validator.validate()
+            const isValid = await this.$validator.validate()            
 
             if (!isValid) {
                 return
             }
+
+            await this.registerUser(this.model)
         }
     }
 }
