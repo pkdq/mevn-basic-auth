@@ -1,3 +1,3 @@
 <template>
-    <h1>Hello From Client</h1>
+    <h1 class="text-center">Hello From Client</h1>
 </template>
