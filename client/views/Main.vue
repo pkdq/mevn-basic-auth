@@ -13,3 +13,16 @@
         <router-view></router-view>
     </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+    methods: {
+        ...mapActions('auth', ['checkAuth'])
+    },
+    created() {
+        this.checkAuth()
+    }
+}
+</script>

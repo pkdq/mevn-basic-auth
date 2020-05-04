@@ -3,26 +3,37 @@ import client from '@utils/axios'
 export default {
     namespaced: true,
 
-    state: {
-        test: 'Here'
-    },
+    state: {},
 
     getters: {},
 
-    mutations: {},
+    mutations: {
+        setAuthentication(state, { user, token }) {
+            state.user = user
+            state.token = token
+        }
+    },
 
     actions: {
-        async registerUser(context, data) {
+
+        checkAuth({ commit }) {
+            if (localStorage.getItem('auth')) {
+                const auth = JSON.parse(localStorage.getItem('auth'))
+
+                commit('setAuthentication', auth)
+            }
+        },
+
+        async registerUser({ commit }, data) {
             let response;
 
             try {
                 response = await client.post('auth/register', data)
+                localStorage.setItem('auth', JSON.stringify(response.data))
+                commit('setAuthentication', response.data)
             } catch (e) {
                 throw e
-            }
-
-            console.warn('RES : ', response.data);
-            
+            }            
 
             return response.data
         }
