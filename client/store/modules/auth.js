@@ -16,10 +16,13 @@ export default {
             let response;
 
             try {
-                response = client.post('auth/register', data)
+                response = await client.post('auth/register', data)
             } catch (e) {
                 throw e
             }
+
+            console.warn('RES : ', response.data);
+            
 
             return response.data
         }

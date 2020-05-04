@@ -27,10 +27,7 @@
                     :error="errors.first('password')"
                     placeholder="Enter your password" />
 
-                <button 
-                    class="w-full text-sm mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light"
-                    @click="register"
-                >Sign Up</button>
+                <c-button label="Sign Up" :loading="loading" @click="register" />
             </div>
         </div>
     </div>
@@ -39,15 +36,18 @@
 <script>
 import { mapActions } from 'vuex'
 
+import cButton from '@components/common/cButton.vue'
 import cTextInput from '@components/common/cTextInput.vue'
 
 export default {
     name: 'Register',
     components: {
+        cButton,
         cTextInput
     },
     
     data: () => ({
+        loading: false,
         model: {
             name: '',
             email: '',
@@ -65,7 +65,17 @@ export default {
                 return
             }
 
-            await this.registerUser(this.model)
+            this.toggleLoading()
+
+            const response = await this.registerUser(this.model)
+
+            this.toggleLoading()
+
+            this.$router.push('/')
+        },
+
+        toggleLoading() {
+            this.loading = !this.loading
         }
     }
 }

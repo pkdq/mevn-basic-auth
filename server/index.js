@@ -36,6 +36,9 @@ app.use(BodyParser.json())
 // Register all the routes
 app.use(v1Router)
 
+// Middleware to Serve static files like images
+app.use(Express.static(Path.resolve(__dirname, 'public')))
+
 // Wildcard Route to handle non-existing routes (client will handle the SPA routes)
 app.get('*', (req, res) => {
     return res.sendFile(Path.resolve(__dirname, 'public/index.html'))
