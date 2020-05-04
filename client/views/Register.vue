@@ -67,11 +67,20 @@ export default {
 
             this.toggleLoading()
 
-            const response = await this.registerUser(this.model)
+            try {
+                const response = await this.registerUser(this.model)
 
-            this.toggleLoading()
+                this.$router.push('/')
+            } catch (error) {
+                this.toggleLoading()
 
-            this.$router.push('/')
+                Object.keys(error.response.data).forEach(field => {
+                    this.errors.add({
+                        field,
+                        msg: error.response.data[field]
+                    })
+                })
+            }
         },
 
         toggleLoading() {
