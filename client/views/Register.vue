@@ -39,15 +39,19 @@ import { mapActions } from 'vuex'
 import cButton from '@components/common/cButton.vue'
 import cTextInput from '@components/common/cTextInput.vue'
 
+import loading from "../mixins/loading";
+import registerError from "../mixins/registerError";
+
+
 export default {
     name: 'Register',
+    mixins: [loading, registerError],
     components: {
         cButton,
         cTextInput
     },
     
     data: () => ({
-        loading: false,
         model: {
             name: '',
             email: '',
@@ -74,18 +78,9 @@ export default {
             } catch (error) {
                 this.toggleLoading()
 
-                Object.keys(error.response.data).forEach(field => {
-                    this.errors.add({
-                        field,
-                        msg: error.response.data[field]
-                    })
-                })
+                this.setErrors(error)
             }
         },
-
-        toggleLoading() {
-            this.loading = !this.loading
-        }
     }
 }
 </script>

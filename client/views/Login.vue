@@ -32,58 +32,53 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
-    import cButton from '@components/common/cButton.vue'
-    import cTextInput from '@components/common/cTextInput.vue'
+import cButton from '@components/common/cButton.vue'
+import cTextInput from '@components/common/cTextInput.vue'
 
-    export default {
-        name: 'Login',
-        components: {
-            cButton,
-            cTextInput
-        },
+import loading from "../mixins/loading";
+import registerError from "../mixins/registerError";
 
-        data: () => ({
-            loading: false,
-            model: {
-                name: '',
-                email: '',
-                password: ''
+
+export default {
+    name: 'Login',
+    mixins: [loading, registerError],
+    components: {
+        cButton,
+        cTextInput
+    },
+
+    data: () => ({
+        model: {
+            name: '',
+            email: '',
+            password: ''
+        }
+    }),
+
+    methods: {
+        ...mapActions('auth', ['loginUser']),
+
+        async login() {
+            const isValid = await this.$validator.validate()
+
+            if (!isValid) {
+                return
             }
-        }),
 
-        methods: {
-            ...mapActions('auth', ['loginUser']),
+            this.toggleLoading()
 
-            async login() {
-                const isValid = await this.$validator.validate()
+            try {
+                const response = await this.loginUser(this.model)
 
-                if (!isValid) {
-                    return
-                }
-
+                this.$router.push('/')
+            } catch (error) {
                 this.toggleLoading()
 
-                try {
-                    const response = await this.loginUser(this.model)
-
-                    this.$router.push('/')
-                } catch (error) {
-                    this.toggleLoading()
-
-                    Object.keys(error.response.data).forEach(field => {
-                        this.errors.add({
-                            field,
-                            msg: error.response.data[field]
-                        })
-                    })
-                }
-            },
-
-            toggleLoading() {
-                this.loading = !this.loading
+                this.setErrors(error)
             }
-        }
+        },
     }
+}
 </script>
