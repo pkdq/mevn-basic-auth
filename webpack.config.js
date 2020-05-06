@@ -17,6 +17,20 @@ module.exports = {
         publicPath: '/',
         path: path.resolve(__dirname, 'server/public')
     },
+    resolve: {
+        alias: {
+            "@views": path.resolve(__dirname, "./client/views"),
+            "@store": path.resolve(__dirname, "./client/store"),
+            "@utils": path.resolve(__dirname, "./client/utils"),
+            "@components": path.resolve(__dirname, "./client/components"),
+            "@routes": path.resolve(__dirname, "./server/routes"),
+            "@config": path.resolve(__dirname, "./server/config"),
+            "@models": path.resolve(__dirname, "./server/models"),
+            "@validators": path.resolve(__dirname, "./server/validators"),
+            "@middlewares": path.resolve(__dirname, "./server/middlewares"),
+            "@controllers": path.resolve(__dirname, "./server/controllers")
+        }
+    },
     module: {
         rules: [
             {

@@ -1,6 +1,6 @@
 <template>
     <div class="container w-full h-12 mx-auto my-16">
-        <div class="max-w-sm mx-auto h-12">
+        <div class="max-w-lg mx-auto h-12">
             <h2 class="text-gold text-center text-xl">Register</h2>
 
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">

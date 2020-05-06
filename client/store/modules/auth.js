@@ -24,6 +24,20 @@ export default {
             }
         },
 
+        async loginUser({ commit }, data) {
+            let response;
+
+            try {
+                response = await  client.post('auth/login', data)
+                localStorage.setItem('auth', JSON.stringify(response.data))
+                commit('setAuthentication', response.data)
+            } catch (e) {
+                throw e
+            }
+
+            return response.data
+        },
+
         async registerUser({ commit }, data) {
             let response;
 
