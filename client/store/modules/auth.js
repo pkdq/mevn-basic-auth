@@ -3,9 +3,14 @@ import client from '@utils/axios'
 export default {
     namespaced: true,
 
-    state: {},
+    state: {
+        user: null,
+        token: null
+    },
 
-    getters: {},
+    getters: {
+        user: (state) => state.user
+    },
 
     mutations: {
         setAuthentication(state, { user, token }) {
@@ -15,6 +20,27 @@ export default {
     },
 
     actions: {
+
+        logout({ commit }) {
+            try {
+                localStorage.removeItem('auth')
+                commit('setAuthentication', { user: null, token: null })
+            } catch (e) {
+                throw e
+            }
+        },
+
+        async resendConfirmationEmail({ commit }, data) {
+            let response;
+
+            try {
+                response = await client.post('auth/register/email/resend')
+            } catch (e) {
+                throw e
+            }
+
+            return response.data
+        },
 
         async resetPassword({ commit }, data) {
             let response;
@@ -66,14 +92,9 @@ export default {
             let response;
 
             try {
-                setTimeout(async () => {
-                    response = await client.post('auth/register/confirm', data)
-                    localStorage.setItem('auth', JSON.stringify(response.data))
-                    commit('setAuthentication', response.data)
-                }, 5000)
-                // response = await client.post('auth/register/confirm', data)
-                // localStorage.setItem('auth', JSON.stringify(response.data))
-                // commit('setAuthentication', response.data)
+                response = await client.post('auth/register/confirm', data)
+                localStorage.setItem('auth', JSON.stringify(response.data))
+                commit('setAuthentication', response.data)
             } catch (e) {
                 throw e
             }

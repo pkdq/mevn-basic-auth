@@ -11,19 +11,17 @@ import ForgotPassword from '@models/ForgotPassword'
 const UserSchema = new Mongoose.Schema({
     name: String,
     email: String,
-    events: {
-        created_at: Date,
-        updated_at: Date,
-        email_confirmed_at: Date
-    },
     password: String,
-    email_confirm_code: String
+    email_confirm_code: String,
+    created_at: Date,
+    updated_at: Date,
+    email_confirmed_at: Date
 })
 
 UserSchema.pre('save', function() {
     this.password = BcryptJs.hashSync(this.password)
     this.email_confirm_code = RandomString.generate(72)
-    this.events.created_at = new Date()
+    this.created_at = new Date()
 })
 
 // UserSchema.post('save', async function() {

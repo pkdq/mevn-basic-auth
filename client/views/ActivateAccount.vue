@@ -17,14 +17,11 @@ export default {
 
     async mounted() {
         try {
-            console.warn('TRY')
             await this.activateAccount({ token: this.$route.params.token })
-            this.$router.push('/')
+            this.redirectTo({ name: 'home' })
         } catch (e) {
-            console.warn('CATCH')
-
             // TODO: Throw flash message here
-            this.$router.push('/')
+            this.redirectTo({ name: 'home' })
         }
     }
 }

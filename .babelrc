@@ -9,6 +9,7 @@
                 "@views": "./client/views",
                 "@store": "./client/store",
                 "@utils": "./client/utils",
+                "@mixins": "./client/mixins",
                 "@components": "./client/components",
                 "@routes": "./server/routes",
                 "@config": "./server/config",

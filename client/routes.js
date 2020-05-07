@@ -10,11 +10,11 @@ import ForgotPassword from "@views/ForgotPassword.vue"
 export default new Router({
     mode: 'history',
     routes: [
-        { path: '/auth/login', component: Login },
-        { path: '/auth/register', component: Register },
-        { path: '/auth/register/confirm/:token', component: ActivateAccount },
-        { path: '/auth/password/reset/:token', component: ResetPassword },
-        { path: '/auth/password/email', component: ForgotPassword },
-        { path: '/', component: Home },
+        { path: '/', component: Home, name: 'home' },
+        { path: '/auth/login', component: Login, name: 'auth-login' },
+        { path: '/auth/register', component: Register, name: 'auth-register' },
+        { path: '/auth/register/confirm/:token', component: ActivateAccount, name: 'auth-register-confirm' },
+        { path: '/auth/password/reset/:token', component: ResetPassword, name: 'auth-password-reset' },
+        { path: '/auth/password/email', component: ForgotPassword, name: 'auth-password-email' },
     ]
 })

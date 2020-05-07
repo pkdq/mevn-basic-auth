@@ -22,6 +22,7 @@ module.exports = {
             "@views": path.resolve(__dirname, "./client/views"),
             "@store": path.resolve(__dirname, "./client/store"),
             "@utils": path.resolve(__dirname, "./client/utils"),
+            "@mixins": path.resolve(__dirname, "./client/mixins"),
             "@components": path.resolve(__dirname, "./client/components"),
             "@routes": path.resolve(__dirname, "./server/routes"),
             "@config": path.resolve(__dirname, "./server/config"),

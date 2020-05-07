@@ -13,6 +13,14 @@ import initStore from '@store/init'
 Vue.use(Router)
 Vue.use(Validator)
 
+Vue.mixin({
+    methods: {
+        redirectTo(route) {
+            this.$router.push(route).catch(err => {})
+        }
+    }
+});
+
 initStore(store)
 
 const app = new Vue({

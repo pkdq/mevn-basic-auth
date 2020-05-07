@@ -17,12 +17,15 @@ const register = async (req, res) => {
 }
 
 const confirm = async (req, res) => {
-    const user = await User.findOne({ email: req.user.email })
-    user.email_confirm_code = null
-    user.events.email_confirmed_at = new Date()
-    user.save()
 
-    // TODO: email_confirm_code not setting to null
+    const user = await User.findOneAndUpdate({
+        email: req.user.email
+    }, {
+        email_confirm_code: null,
+        email_confirmed_at: new Date()
+    }, {
+        new: true
+    })
 
     const token = user.generateToken()
 
@@ -30,7 +33,7 @@ const confirm = async (req, res) => {
 }
 
 const resend = async (req, res) => {
-    if (!req.user.events.email_confirmed_at) {
+    if (!req.user.email_confirmed_at) {
         await req.user.sendActivationEmail()
     }
 

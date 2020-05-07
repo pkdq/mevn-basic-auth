@@ -39,8 +39,8 @@ import { mapActions } from 'vuex'
 import cButton from '@components/common/cButton.vue'
 import cTextInput from '@components/common/cTextInput.vue'
 
-import loading from "../mixins/loading";
-import registerError from "../mixins/registerError";
+import loading from "@mixins/loading";
+import registerError from "@mixins/registerError";
 
 
 export default {
@@ -72,9 +72,8 @@ export default {
             this.toggleLoading()
 
             try {
-                const response = await this.registerUser(this.model)
-
-                this.$router.push('/')
+                await this.registerUser(this.model)
+                this.redirectTo({ name: 'home' })
             } catch (error) {
                 this.toggleLoading()
 
