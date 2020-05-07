@@ -1,7 +1,7 @@
 <template>
     <div class="container w-full h-12 mx-auto my-16">
         <div class="max-w-lg mx-auto h-12">
-            <h2 class="text-gold text-center text-xl">Login</h2>
+            <h2 class="text-gold text-center text-xl">Reset Your Password</h2>
 
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">
 
@@ -10,26 +10,14 @@
                 </div>
 
                 <c-text-input
-                    name="email"
-                    v-model="model.email"
-                    type="email"
-                    v-validate="'required|email'"
-                    :error="errors.first('email')"
-                    placeholder="Enter your email" />
-
-                <c-text-input
                     name="password"
                     v-model="model.password"
                     type="password"
                     v-validate="'required|min:6'"
                     :error="errors.first('password')"
-                    placeholder="Enter your password" />
+                    placeholder="Enter your new password" />
 
-                <c-button label="Sign In" :loading="loading" @click="login" />
-
-                <div class="mt-8 flex justify-center items-center">
-                    <router-link to="/auth/password/email" class="text-brown">Forgot Password ?</router-link>
-                </div>
+                <c-button label="Reset Password" :loading="loading" @click="reset" />
             </div>
         </div>
     </div>
@@ -56,14 +44,13 @@ export default {
     data: () => ({
         model: {
             email: '',
-            password: ''
         }
     }),
 
     methods: {
-        ...mapActions('auth', ['loginUser']),
+        ...mapActions('auth', ['resetPassword']),
 
-        async login() {
+        async reset() {
             const isValid = await this.$validator.validate()
 
             if (!isValid) {
@@ -73,7 +60,10 @@ export default {
             this.toggleLoading()
 
             try {
-                const response = await this.loginUser(this.model)
+                const response = await this.resetPassword({
+                    ...this.model,
+                    token: this.$route.params.token
+                })
 
                 this.$router.push('/')
             } catch (error) {

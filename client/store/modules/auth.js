@@ -16,6 +16,30 @@ export default {
 
     actions: {
 
+        async resetPassword({ commit }, data) {
+            let response;
+
+            try {
+                response = await client.post('auth/password/reset', data)
+            } catch (e) {
+                throw e
+            }
+
+            return response.data;
+        },
+
+        async forgotPassword({ commit }, data) {
+            let response;
+
+            try {
+                response = await client.post('auth/password/email', data)
+            } catch (e) {
+                throw e
+            }
+
+            return response.data
+        },
+
         checkAuth({ commit }) {
             if (localStorage.getItem('auth')) {
                 const auth = JSON.parse(localStorage.getItem('auth'))

@@ -62,7 +62,7 @@ UserSchema.methods.forgotPassword = async function() {
         .to(this.email, this.name)
         .subject('Password reset')
         .data({
-            url: `${config.url} /auth/password/reset/${token}`,
+            url: `${config.url}/auth/password/reset/${token}`,
             name: this.name
         })
         .send()
