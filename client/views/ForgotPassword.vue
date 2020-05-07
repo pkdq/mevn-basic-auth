@@ -34,7 +34,7 @@ import registerError from "../mixins/registerError";
 
 
 export default {
-    name: 'Login',
+    name: 'ForgotPassword',
     mixins: [loading, registerError],
     components: {
         cButton,

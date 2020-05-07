@@ -11,6 +11,8 @@ const register = async (req, res) => {
 
     const token = user.generateToken()
 
+    await user.sendActivationEmail()
+
     return res.status(200).json({ user, token })
 }
 
@@ -19,6 +21,8 @@ const confirm = async (req, res) => {
     user.email_confirm_code = null
     user.events.email_confirmed_at = new Date()
     user.save()
+
+    // TODO: email_confirm_code not setting to null
 
     const token = user.generateToken()
 

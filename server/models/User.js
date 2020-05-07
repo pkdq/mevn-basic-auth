@@ -26,9 +26,9 @@ UserSchema.pre('save', function() {
     this.events.created_at = new Date()
 })
 
-UserSchema.post('save', async function() {
-    await this.sendActivationEmail()
-})
+// UserSchema.post('save', async function() {
+//     await this.sendActivationEmail()
+// })
 
 UserSchema.methods.sendActivationEmail = async function() {
     await new Mail('confirm-account')

@@ -62,6 +62,25 @@ export default {
             return response.data
         },
 
+        async activateAccount({ commit }, data) {
+            let response;
+
+            try {
+                setTimeout(async () => {
+                    response = await client.post('auth/register/confirm', data)
+                    localStorage.setItem('auth', JSON.stringify(response.data))
+                    commit('setAuthentication', response.data)
+                }, 5000)
+                // response = await client.post('auth/register/confirm', data)
+                // localStorage.setItem('auth', JSON.stringify(response.data))
+                // commit('setAuthentication', response.data)
+            } catch (e) {
+                throw e
+            }
+
+            return response.data
+        },
+
         async registerUser({ commit }, data) {
             let response;
 
