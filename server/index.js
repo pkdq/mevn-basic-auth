@@ -45,6 +45,6 @@ app.get('*', (req, res) => {
 })
 
 // Create server and listen to a PORT
-app.listen(3000, () => {
+app.listen(config.port, () => {
     console.log('Server Started !')
 })

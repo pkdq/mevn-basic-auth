@@ -35,6 +35,10 @@ const confirm = async (req, res) => {
 const resend = async (req, res) => {
     if (!req.user.email_confirmed_at) {
         await req.user.sendActivationEmail()
+
+        return res.status(200).json({
+            message: 'Activation link sent !!'
+        })
     }
 
     return res.status(200).json({

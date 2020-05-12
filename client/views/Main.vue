@@ -14,6 +14,7 @@
             <router-link class="text-gold" to="/">MEVN</router-link>
 
             <div class="" v-if="user">
+                <router-link class="text-brown mr-2" to="/dashboard">Dashboard</router-link>
                 <span class="cursor-pointer text-brown hover:text-brown-darkest" @click="logoutUser">Logout</span>
             </div>
             <div v-else>
@@ -37,7 +38,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('auth', ['logout', 'checkAuth', 'resendConfirmationEmail']),
+        ...mapActions('auth', ['logout', 'resendConfirmationEmail']),
 
         async resendEmailConfirm() {
             try {
@@ -53,9 +54,5 @@ export default {
             this.redirectTo({ name: 'home' })
         }
     },
-
-    created() {
-        this.checkAuth()
-    }
 }
 </script>

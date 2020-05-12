@@ -10,6 +10,8 @@ import Main from '@views/Main.vue'
 import store from '@store'
 import initStore from '@store/init'
 
+require('@store/subscriber')
+
 Vue.use(Router)
 Vue.use(Validator)
 
@@ -23,9 +25,11 @@ Vue.mixin({
 
 initStore(store)
 
-const app = new Vue({
-    el: '#app',
-    store,
-    router: routes,
-    render: h => h(Main)
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+    const app = new Vue({
+        el: '#app',
+        store,
+        router: routes,
+        render: h => h(Main)
+    })
 })

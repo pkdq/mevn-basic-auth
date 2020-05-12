@@ -8,6 +8,7 @@ import UserAccountConfirmationValidator from '@validators/UserAccountConfirmatio
 
 import AuthMiddleware from '@middlewares/auth'
 
+import UserController from '@controllers/v1/auth/UserController'
 import LoginController from '@controllers/v1/auth/LoginController'
 import RegisterController from '@controllers/v1/auth/RegisterController'
 import ForgotPasswordController from '@controllers/v1/auth/ForgotPasswordController'
@@ -24,5 +25,6 @@ authRouter.post('/password/reset', ResetPasswordValidator, ForgotPasswordControl
 
 // Logged in Routes
 authRouter.post('/register/email/resend', AuthMiddleware, RegisterController.resend)
+authRouter.get('/user', AuthMiddleware, UserController.getUser)
 
 export default authRouter
